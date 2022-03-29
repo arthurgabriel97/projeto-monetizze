@@ -2,7 +2,7 @@
  
 Para a execução do projeto, é necessário ter
 
--node
+- node
 
 Após a instalação do node, execute na pasta raiz o seguinte comando:
 
