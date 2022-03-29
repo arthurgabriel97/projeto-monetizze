@@ -8,6 +8,7 @@ const server = http.createServer((req, res) => {
     const reqBreaked = req.url.split("?");
 
     if (reqBreaked[0] === "/decode" && req.method == "POST") {
+
         let body = '';
         req.on('data', function (chunk) {
             body += chunk;
@@ -17,7 +18,9 @@ const server = http.createServer((req, res) => {
             var jsonBody = JSON.parse(body);
             res.end("A String é traduzida como: " + invertAndConvert(jsonBody.encoded));
         });
-    } else if(reqBreaked[0] === "/decode" && req.method == "GET") {
+
+    } 
+    else if(reqBreaked[0] === "/decode" && req.method == "GET") {
         var data = reqBreaked[1].split("=")
 
         res.setHeader('Content-Type', 'application/json');
@@ -32,9 +35,9 @@ const server = http.createServer((req, res) => {
         res.end("A String é traduzida como: " + invertAndConvert(data[1]));
     } 
     else {
-        res.statusCode = 200;
+        res.statusCode = 404;
         res.setHeader('Content-Type', 'application/json');
-        res.end('Esta pagina esta vazia ...');
+        res.end('Esta pagina esta vazia');
     }
 });
 
