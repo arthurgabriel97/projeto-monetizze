@@ -5,7 +5,9 @@ const port = 3000;
 
 const server = http.createServer((req, res) => {
 
-    if (req.url === "/decode" && req.method == "POST") {
+    const reqBreaked = req.url.split("?");
+
+    if (reqBreaked[0] === "/decode" && req.method == "POST") {
         let body = '';
         req.on('data', function (chunk) {
             body += chunk;
@@ -15,7 +17,21 @@ const server = http.createServer((req, res) => {
             var jsonBody = JSON.parse(body);
             res.end("A String é traduzida como: " + invertAndConvert(jsonBody.encoded));
         });
-    } else {
+    } else if(reqBreaked[0] === "/decode" && req.method == "GET") {
+        var data = reqBreaked[1].split("=")
+
+        res.setHeader('Content-Type', 'application/json');
+
+        if (data.length > 2) {
+            res.statusCode = 400;
+            res.end('É preciso passar apenas um parâmetro');
+            return
+        }
+
+        res.statusCode = 200;
+        res.end("A String é traduzida como: " + invertAndConvert(data[1]));
+    } 
+    else {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.end('Esta pagina esta vazia ...');

@@ -10,8 +10,14 @@ Após a instalação do node, execute na pasta raiz o seguinte comando:
 
 Com isso, a aplicação será executada no endereço 127.0.0.1:3000
 
-Agora, é necessário fazer uma requisição POST para a 127.0.0.1:3000/decode com o seguinte 'body'
+Agora, é necessário fazer:
 
-    {
-        "encoded" : "'String com a função codificada'"
-    }
+- Uma requisição POST para a 127.0.0.1:3000/decode com o seguinte 'body'
+
+        {
+            "encoded" : "'String codificada'"
+        }
+    
+ou
+
+- Uma requisição GET para a 127.0.0.1:3000/decode?encoded=StringCodificada
